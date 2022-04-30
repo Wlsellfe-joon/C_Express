@@ -1,0 +1,93 @@
+#include<stdio.h>
+#define num 10
+#define Find 200
+
+void New(int *b) {					//Create Random 1X Matrix
+	for (int i = 0; i < num; i++)
+	{
+		*(b+i)= rand();
+	}
+}
+void Copy(int* a, int* b) {//b가 원본, a가 사본 Copying function 509p	Q05
+	for (int i = 0; i < num; i++) {
+		*(a + i) = *(b + i);
+	}
+}
+void Print(int* a) {			//Print 1X Matrix		509p	Q06
+	for (int i = 0; i < 2*num; i++) {
+		printf("%d ", *(a + i));
+	}printf("\n");
+}
+void SUM(int* a, int* b, int* sum) {		//Summation of two diffrents 1XMatrix	509p Q07
+	for (int i = 0; i < num; i++) {
+		*(sum+i) = *(a+i) + *(b+i);
+	}
+}
+int componentSUM(int* a) {			//Matrix Components Summation 509p Q08
+	int sum=0;
+	for (int i = 0; i < num; i++) {
+		sum += *(a + i);
+	}
+	return sum;
+}
+void FINDER(int* a) {			//Find that wanted index 510p Q09
+	for (int i = 0; i < num; i++) {
+		if (*(a + i) == Find) printf("%d ", i);
+	}
+}
+void lcm_gcd(int* a, int* b, int* Lcm, int* Gcd) {		//510p Q10 Find lcm & gcd
+	int mul = 1;
+	while (mul % *a != 0 || mul % *b != 0) mul++;
+	*Lcm = mul;
+
+	int gcd = 1;
+	if (*a < *b) {
+		for (int i=1,div=1; i <= *b; i++,div++) {
+			if (*a % div == 0 && *b % div == 0) {
+				gcd = div;
+			}
+		}
+	}
+	else
+		for (int i = 1,div = 1; i <= *a; i++,div++) {
+			if (*a % div == 0 && *b % div == 0) {
+				gcd = div;
+			}
+		}
+	*Gcd = gcd;
+
+}
+void Union(int* a, int* b, int* c) { //510p Q11
+	for (int i = 0; i < num; i++)	// Union of Two Arrangement
+		*(c + i) = *(a + i);
+	
+	for (int i = 0; i < num; i++)
+		*(c + i+10) = *(b + i);
+
+	for (int i = 0, k = 0; i < 2 * num; i++) { // The sorting of ArrangeMent
+		for (int j = i + 1; j < 2 * num; j++) {
+			if (*(c + i) >= *(c + j)) {
+				k = *(c + i);
+				*(c + i) = *(c + j);
+				*(c + j) = k;
+			}
+		}
+	}
+}
+int get_int(int *x, int *y) { //511p Q12
+
+	printf("2개의 정수를 입력하시오 : ");
+	scanf("%d %d", x, y);
+}
+
+
+
+int main()
+{
+	int x, y;
+	get_int(&x, &y);
+	printf("%d", x + y);
+
+	return 0;
+
+}
